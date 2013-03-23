@@ -18,7 +18,7 @@ master = Reset("refs/heads/master")
 master.dump(output)
 
 changes = [FileChanges('M', 'world', world.id, mode="100644"),
-           FileChanges('M', 'bar',   bar.id,   mode="100644")]
+           FileChanges('M', 'bar', bar.id, mode="100644")]
 when = datetime(year=2005, month=4, day=7,
                 hour=15, minute=16, second=10,
                 tzinfo=FixedTimeZone("-0700"))
@@ -27,8 +27,8 @@ commit1 = Commit("refs/heads/master",
                  "Com M. Iter", "comm@iter.email", when,
                  "My first commit!  Wooot!\n\nLonger description",
                  changes,
-                 from_commit = None,
-                 merge_commits = [])
+                 from_commit=None,
+                 merge_commits=[])
 commit1.dump(output)
 
 world = Blob("Hello\nHi")
@@ -36,7 +36,7 @@ world.dump(output)
 world_link = Blob("world")
 world_link.dump(output)
 
-changes = [FileChanges('M', 'world',  world.id,      mode="100644"),
+changes = [FileChanges('M', 'world', world.id, mode="100644"),
            FileChanges('M', 'planet', world_link.id, mode="120000")]
 when += timedelta(days=3, hours=4, minutes=6)
 commit2 = Commit("refs/heads/master",
@@ -44,8 +44,8 @@ commit2 = Commit("refs/heads/master",
                  "Com M. Iter", "comm@iter.email", when,
                  "Make a symlink to world called planet, modify world",
                  changes,
-                 from_commit = commit1.id,
-                 merge_commits = [])
+                 from_commit=commit1.id,
+                 merge_commits=[])
 commit2.dump(output)
 
 script = Blob("#!/bin/sh\n\necho Hello")
@@ -58,8 +58,8 @@ commit3 = Commit("refs/heads/master",
                  "Com M. Iter", "comm@iter.email", when,
                  "Add runme script, remove bar",
                  changes,
-                 from_commit = commit2.id,
-                 merge_commits = [])
+                 from_commit=commit2.id,
+                 merge_commits=[])
 commit3.dump(output)
 
 progress = Progress("Done with the master branch now...")
@@ -80,8 +80,8 @@ commit4 = Commit("refs/heads/devel",
                  "Com M. Iter", "comm@iter.email", when,
                  "Modify world",
                  changes,
-                 from_commit = commit1.id,
-                 merge_commits = [])
+                 from_commit=commit1.id,
+                 merge_commits=[])
 commit4.dump(output)
 
 world = Blob("Hello\nHi\nGoodbye")
@@ -101,8 +101,8 @@ commit5 = Commit("refs/heads/devel",
                  "Com M. Iter", "comm@iter.email", when,
                  "Merge branch 'master'\n",
                  changes,
-                 from_commit = commit4.id,
-                 merge_commits = [commit3.id])
+                 from_commit=commit4.id,
+                 merge_commits=[commit3.id])
 commit5.dump(output)
 
 
